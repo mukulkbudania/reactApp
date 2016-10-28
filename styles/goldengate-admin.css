@@ -1,0 +1,32 @@
+#displayContent{
+	margin-top: 50px;
+	height:100%;
+	position: fixed;
+}
+#sidemenu{
+	float:left;
+	height:100%;
+	border-right: black 1px solid;
+	display: inline-block;
+	background-color: #222;
+	color: #30a5ff,
+	width: 200px
+}
+#content{
+	float: right;
+	padding: 10px;
+}
+#footer{
+	border-top: black 1px solid;
+	background-color: #222;
+	width: 100%;
+	min-height: 50px;
+	position: fixed;
+	right:0;
+	bottom:0;
+	text-align: right;
+	padding: 10px
+}
+.nav-pills li a{
+	border-radius: 0px !important;
+}
