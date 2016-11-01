@@ -1,10 +1,9 @@
 export function fetchAgents() {
 
 	return function(dispatch) {
-		dispatch({type: "FETCH_AGENTS_LOADING", payload: ""})
-	    axios.get("localhost:9999/goldengate-admin/agents")
+	    axios.get("http://localhost:9999/goldengate-admin/agents")
 	      .then((response) => {
-	        dispatch({type: "FETCH_AGENTS_FULFILLED", payload: response.data})
+	        dispatch({type: "FETCH_AGENTS_FULFILLED", payload: response})
 	      })
 	      .catch((err) => {
 	        dispatch({type: "FETCH_AGENTS_REJECTED", payload: err})

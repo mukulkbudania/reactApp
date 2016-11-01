@@ -1,24 +1,23 @@
-const initialState = {
-	auditTrail : {
-		data : [],
-		state : {
-			init: true,
-			loading: false,
-			fetched: false,
-			error: false
-		},
-		totalRecords : 0 
-	}
-	
+export function listAuditTrail (data) {
+  return data.response;
 }
-const dataReducer = function(state={initialState}, action){
-	console.log('Reducer: ');
-	console.log(action);
-	switch(action.type){
-		case "FETCH_AUDIT_TRAIL": return {...state,
-						route:action.payload };
-		default: return {...state};				
-	}
-		
+
+function handleTableActions(state, action){
+	switch (action.type) {
+    case ACTIONS.REQUEST_AUDIT_DATA:
+      return { isFetching: true }
+    case ACTIONS.RECEIVE_AUDIT_DATA:
+      return {
+        isFetching: false,
+        data: listAuditTrail(action.data)
+      }
+    default:
+      return state
+  }	
+}
+
+
+const dataReducer = function(state={}, action){
+	return Object.assign({},state,handleTableActions(state,action));
 }
 export default dataReducer;

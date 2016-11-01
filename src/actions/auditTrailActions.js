@@ -1,13 +1,26 @@
-export function fetchAuditTrail() {
+import CONSTS from '../constants'
+import fetchDispatch from './fetchUtils'
 
-	return function(dispatch) {
-		dispatch({type: "FETCH_AUDIT_TRAIL_LOADING", payload: response.data})
-	    axios.get("localhost:9999/goldengate-admin/auditTrail")
-	      .then((response) => {
-	        dispatch({type: "FETCH_AUDIT_TRAIL_FULFILLED", payload: response.data})
-	      })
-	      .catch((err) => {
-	        dispatch({type: "FETCH_AUDIT_TRAIL_REJECTED", payload: err})
-	      })
-	  }
+const apiProps = {
+  url: CONSTS.BASE_URL + CONSTS.URLS.AUDIT_TRAIL,
+  types: {
+    request: CONSTS.ACTIONS.REQUEST_AUDIT_TRAIL_DATA,
+    receive: CONSTS.ACTIONS.RECEIVE_AUDIT_TRAIL_DATA,
+  },
+  verb: CONSTS.VERBS.POST,
+  body: {}
 }
+
+function shouldFetchData ({table}) {
+  return (!table.data || !table.isFetching)
+}
+
+function fetchData () {
+  return (dispatch, getState) => {
+    if (shouldFetchData(getState())) {
+      return dispatch(fetchDispatch(apiProps))
+    }
+  }
+}
+
+export default { fetchData }

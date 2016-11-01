@@ -1,14 +1,12 @@
 import React from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
+import { auditTrailActions as actions } from '../../actions'
 import { connect } from 'react-redux'
-
-@connect((store)=> {
-	return {
-		data : store.auditTrail
-	};
-})
-class AuditTrail extends React.Component{
-	columns = [
+import { bindActionCreators } from 'redux'
+import Table from '../table'
+const mapStateToProps = ({table}) => table
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const columns = [
 		{name: 'userId',displayText: 'USER ID'},
 		{name: 'action',displayText: 'ACTION'},
 		{name: 'latitude',displayText: 'LAT'},
@@ -25,11 +23,15 @@ class AuditTrail extends React.Component{
 		{name: 'deviceManufacturer', displayText: 'MANUFACTURER'},
 		{name: 'additionalParams',displayText: 'ADDITIONAL PARAMS'},
 	];
-	render() {
-		return (
-		<span> AUDIT TRAIL </span>
-		);
-	} 
+
+const AuditTrail = (props) => {
+	console.log('Audit Trail: ',props)
+  return (
+    <div>
+      <h2> Food Nutrients List </h2>
+      <Table columns={columns} {...props} />
+    </div>
+  )
 }
 
-export default AuditTrail;
+export default connect(mapStateToProps, mapDispatchToProps)(AuditTrail)

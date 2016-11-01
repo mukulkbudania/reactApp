@@ -11,7 +11,7 @@ class Layout extends React.Component{
 			<div>
 				<div id='header'><Header /></div>
 				<div id='displayContent' >
-					<div id='sidemenu'><SideMenu selected={this.props}/></div>
+					<div id='sidemenu'><SideMenu /></div>
 					<div id='content'>{this.props.children}</div>
 				</div>
 				<div id='footer'><Footer /></div>

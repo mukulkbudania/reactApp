@@ -1,5 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import fetchAgents from '../../actions/agentActions'
+@connect((store)=> {
+	return {
+		data : store.agents
+	};
+})
 class Agents extends React.Component{
 	columns = [
 		{name: 'id',displayText: 'ID'},
@@ -9,10 +15,23 @@ class Agents extends React.Component{
 		{name: 'emailId',displayText: 'EMAIL ID'},
 		{name: 'source',displayText: 'SOURCE'}
 	];
+	willRender(){
+		//console.log('In agents will render',this.props);
+		//fetchAgents();
+	}
 	render() {
-		return (
-			<span> AGENTS </span>
-		);
+		return (<span>AGENTS</span>);
+		/*return (
+			<BootstrapTable data={this.props.data} pagination={true}>
+			{ this.columns.map((column,index) => 
+							<TableHeaderColumn dataField={column.name} key={index}>
+							{column.displayText}
+							</TableHeaderColumn>
+						)
+					}
+		</BootstrapTable>
+
+		);*/
 	} 
 }
 
